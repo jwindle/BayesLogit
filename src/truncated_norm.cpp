@@ -5,7 +5,7 @@
 // Code modified from <https://github.com/jwindle/BayesLogit>
 
 #include "truncated_norm.h"
-#include "simple_rng_wrapper.h"
+#include "simple_RNG_wrapper.h"
 
 
 double flat(double a, double b) {
