@@ -1,5 +1,5 @@
 #include "PolyaGammaSPApprox.h"
-#include "InvertY.hpp"
+#include "InvertY.h"
 #include <stdexcept>
 
 //------------------------------------------------------------------------------
