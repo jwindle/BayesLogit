@@ -1,6 +1,6 @@
 // Jesse Windle
 
-#include "PolyaGammaAlt.h"
+#include "PolyaGammaAltApprox.h"
 #include <stdexcept>
 
 
