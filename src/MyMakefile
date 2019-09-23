@@ -1,0 +1,24 @@
+# Jesse Windle, 2019
+
+# R.home("include")
+RINC = /Library/Frameworks/R.framework/Resources/include
+# R.home("lib")
+RLIB = /Library/Frameworks/R.framework/Resources/lib
+
+CC = g++-8
+
+
+PolyaGamma.o: PolyaGamma.h PolyaGamma.cpp
+	$(CC) PolyaGamma.cpp -I $(RINC) -L $(RLIB) -c -o PolyaGamma.o
+
+truncated_norm.o: truncated_norm.h truncated_norm.cpp
+	$(CC) truncated_norm.cpp -I $(RINC) -L $(RLIB) -c -o truncated_norm.o
+
+truncated_gamma.o: truncated_gamma.h truncated_gamma.cpp
+	$(CC) truncated_gamma.cpp -I $(RINC) -L $(RLIB) -c -o truncated_gamma.o
+
+inverse_gaussian.o: inverse_gaussian.h inverse_gaussian.cpp
+	$(CC) inverse_gaussian.cpp -I $(RINC) -L $(RLIB) -c -o inverse_gaussian.o
+
+clean:
+	rm *.o
