@@ -8,6 +8,18 @@ RLIB = /Library/Frameworks/R.framework/Resources/lib
 CC = g++-8
 
 
+# %.o: %.cpp
+# 	$(CC) $< -I $(RINC) -c -o $@
+
+PolyaGammaSPApprox.o: PolyaGammaSPApprox.h PolyaGammaSPApprox.cpp
+	$(CC) PolyaGammaSPApprox.cpp -I $(RINC) -c -o PolyaGammaSPApprox.o
+
+InvertY.o: InvertY.h InvertY.cpp
+	$(CC) InvertY.cpp -I $(RINC) -c -o InvertY.o
+
+PolyaGammaApproxAlt.o: PolyaGammaApproxAlt.h PolyaGammaApproxAlt.cpp
+	$(CC) PolyaGammaApproxAlt.cpp -I $(RINC) -L $(RLIB) -c -o PolyaGammaApproxAlt.o
+
 PolyaGamma.o: PolyaGamma.h PolyaGamma.cpp
 	$(CC) PolyaGamma.cpp -I $(RINC) -L $(RLIB) -c -o PolyaGamma.o
 
