@@ -1,0 +1,15 @@
+citHeader("To cite package 'BayesLogit' in publications use:")
+
+citEntry(entry = "Unpublished",
+  title  = "Bayesian inference for logistic models using Polya-Gamma latent variables",
+  author = personList(as.person("Nicholas G. Polson"),
+                      as.person("James G. Scott"),
+                      as.person("Jesse Windle")),
+  year   = 2013,
+  url    = "http://arxiv.org/abs/1205.0310",
+  note   = "Most recent version: Feb. 2013.",
+  textVersion =
+    paste("Nicholas G. Polson, James G. Scott, Jesse Windle.",
+	      "Bayesian inference for logistic models using Polya-Gamma latent variables.",
+	      "URL <http://arxiv.org/abs/1205.0310> (2013).")
+)
