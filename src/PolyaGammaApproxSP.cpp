@@ -1,4 +1,4 @@
-#include "PolyaGammaSPApprox.h"
+#include "PolyaGammaApproxSP.h"
 #include "InvertY.h"
 #include <stdexcept>
 
@@ -53,7 +53,7 @@
 // }
 
 
-double PolyaGammaSP::rtigauss(double mu, double lambda, double trunc)
+double PolyaGammaApproxSP::rtigauss(double mu, double lambda, double trunc)
 {
   // mu = fabs(mu);
   double X = trunc + 1.0;
@@ -74,7 +74,7 @@ double PolyaGammaSP::rtigauss(double mu, double lambda, double trunc)
   return X;
 }
 
-double PolyaGammaSP::y_func(double v)
+double PolyaGammaApproxSP::y_func(double v)
 {
   double tol = 1e-6;
   double y   = 0.0;
@@ -88,7 +88,7 @@ double PolyaGammaSP::y_func(double v)
   return y;
 }
 
-double PolyaGammaSP::cos_rt(double v)
+double PolyaGammaApproxSP::cos_rt(double v)
 {
   double y   = 0.0;
   double r   = sqrt(fabs(v));
@@ -99,7 +99,7 @@ double PolyaGammaSP::cos_rt(double v)
   return y;
 }
 
-void PolyaGammaSP::delta_func(double x, double mid, FD& delta)
+void PolyaGammaApproxSP::delta_func(double x, double mid, FD& delta)
 {
   if (x >= mid) {
     delta.val = log(x) - log(mid);
@@ -111,7 +111,7 @@ void PolyaGammaSP::delta_func(double x, double mid, FD& delta)
   }
 }
 
-double PolyaGammaSP::phi_func(double x, double z, FD& phi)
+double PolyaGammaApproxSP::phi_func(double x, double z, FD& phi)
 {
   // double v = yv.v_func(x);
   double v = v_eval(x);
@@ -124,7 +124,7 @@ double PolyaGammaSP::phi_func(double x, double z, FD& phi)
   return v;
 }
 
-double PolyaGammaSP::tangent_to_eta(double x, double z, double mid, Line& tl)
+double PolyaGammaApproxSP::tangent_to_eta(double x, double z, double mid, Line& tl)
 {
   FD phi, delta, eta;
   double v;
@@ -144,7 +144,7 @@ double PolyaGammaSP::tangent_to_eta(double x, double z, double mid, Line& tl)
   return v;
 }
 
-double PolyaGammaSP::sp_approx(double x, double n, double z)
+double PolyaGammaApproxSP::sp_approx(double x, double n, double z)
 {
   // double v  = yv.v_func(x);
   double v = v_eval(x);
@@ -165,9 +165,9 @@ double PolyaGammaSP::sp_approx(double x, double n, double z)
   return exp(log_spa);
 }
 
-int PolyaGammaSP::draw(double& d, double n, double z, int maxiter)
+int PolyaGammaApproxSP::draw(double& d, double n, double z, int maxiter)
 {
-  if (n < 1) fprintf(stderr, "PolyaGammaSP::draw: n must be >= 1.\n");
+  if (n < 1) fprintf(stderr, "PolyaGammaApproxSP::draw: n must be >= 1.\n");
   z = 0.5 * fabs(z);
 
   double xl = y_func(-1*z*z);    // Mode of phi - Left point.

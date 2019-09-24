@@ -1,6 +1,6 @@
 // Jesse Windle
 
-#include "PolyaGammaAltApprox.h"
+#include "PolyaGammaApproxAlt.h"
 #include <stdexcept>
 
 
@@ -23,7 +23,7 @@
 // }
 
 
-double PolyaGammaAlt::a_coef(int n, double x, double h)
+double PolyaGammaApproxAlt::a_coef(int n, double x, double h)
 {
   double d_n = 2.0 * (double) n + h;
   double log_out = h * log(2.0) - lgamma(h) + lgamma(n+h) \
@@ -33,7 +33,7 @@ double PolyaGammaAlt::a_coef(int n, double x, double h)
   return out;
 }
 
-double PolyaGammaAlt::a_coef_recursive(double n, double x, double h, double coef_h, double& gnh_over_gn1_gh)
+double PolyaGammaApproxAlt::a_coef_recursive(double n, double x, double h, double coef_h, double& gnh_over_gn1_gh)
 {
   double d_n = 2.0 * (double) n + h;
   // gamma_nh_over_n *= (n + h - 1) / n;  // Can speed up further by separate function for a0 and an, n > 0.
@@ -46,7 +46,7 @@ double PolyaGammaAlt::a_coef_recursive(double n, double x, double h, double coef
   return coef * exp(log_kernel);
 }
 
-double PolyaGammaAlt::pigauss(double x, double z, double lambda)
+double PolyaGammaApproxAlt::pigauss(double x, double z, double lambda)
 {
   // z = 1 / mean
   double b = sqrt(lambda / x) * (x * z - 1);
@@ -55,7 +55,7 @@ double PolyaGammaAlt::pigauss(double x, double z, double lambda)
   return y;
 }
 
-double PolyaGammaAlt::w_left(double trunc, double h, double z)
+double PolyaGammaApproxAlt::w_left(double trunc, double h, double z)
 {
   double out = 0;
   if (z != 0) 
@@ -65,14 +65,14 @@ double PolyaGammaAlt::w_left(double trunc, double h, double z)
   return out;
 }
 
-double PolyaGammaAlt::w_right(double trunc, double h, double z)
+double PolyaGammaApproxAlt::w_right(double trunc, double h, double z)
 {
   double lambda_z = PISQ * 0.125 + 0.5 * z * z;
   double p = exp(h * log(HALFPI / lambda_z)) * (1.0-p_gamma_rate(trunc, h, lambda_z, false));
   return p;
 }
 
-double PolyaGammaAlt::rtigauss(double h, double z, double trunc)
+double PolyaGammaApproxAlt::rtigauss(double h, double z, double trunc)
 {
   z = fabs(z);
   double mu = h/z;
@@ -94,7 +94,7 @@ double PolyaGammaAlt::rtigauss(double h, double z, double trunc)
   return X;
 }
 
-double PolyaGammaAlt::g_tilde(double x, double h, double trunc)
+double PolyaGammaApproxAlt::g_tilde(double x, double h, double trunc)
 {
   double out = 0;
   if (x > trunc) 
@@ -109,10 +109,10 @@ double PolyaGammaAlt::g_tilde(double x, double h, double trunc)
 				  // Sample //
 ////////////////////////////////////////////////////////////////////////////////
 
-double PolyaGammaAlt::draw_abridged(double h, double z, int max_inner)
+double PolyaGammaApproxAlt::draw_abridged(double h, double z, int max_inner)
 {
   if (h < 1 || h > 4) {
-    fprintf(stderr, "PolyaGammaAlt::draw h = %g must be in [1,4]\n", h);
+    fprintf(stderr, "PolyaGammaApproxAlt::draw h = %g must be in [1,4]\n", h);
     return 0;
   }
 
@@ -200,10 +200,10 @@ double PolyaGammaAlt::draw_abridged(double h, double z, int max_inner)
   return -1.0;
 } // draw
 
-double PolyaGammaAlt::draw(double h, double z, int max_inner)
+double PolyaGammaApproxAlt::draw(double h, double z, int max_inner)
 {
   if (h < 1) {
-    fprintf(stderr, "PolyaGammaAlt::draw h = %g must be >= 1\n", h);
+    fprintf(stderr, "PolyaGammaApproxAlt::draw h = %g must be >= 1\n", h);
     return 0;
   }
 

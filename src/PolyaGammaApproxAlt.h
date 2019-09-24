@@ -53,7 +53,7 @@ const double trunc_schedule[] = { // seq(1,4,by=0.01) -> 301 entries.
 
 //------------------------------------------------------------------------------
 
-class PolyaGammaAlt
+class PolyaGammaApproxAlt
 {
 
  public:

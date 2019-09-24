@@ -1,7 +1,7 @@
 // -*- mode: c++; -*-
 
-#ifndef __POLYAGAMMASP__
-#define __POLYAGAMMASP__
+#ifndef __POLYAGAMMAAPPROXSP__
+#define __POLYAGAMMAAPPROXSP__
 
 
 #include "simple_RNG_wrapper.h"
@@ -29,7 +29,7 @@ struct Line {
 
 
 // PolyaGamma approximation by SP.
-class PolyaGammaSP
+class PolyaGammaApproxSP
 {
 
 public:
