@@ -1,6 +1,6 @@
 ## Copyright 2013 Nick Polson, James Scott, and Jesse Windle.
 
-## This file is part of BayesLogit, distributed under the GNU General Public
+## This file is part of BayesLogit2, distributed under the GNU General Public
 ## License version 3 or later and without ANY warranty, implied or otherwise.
 
 ################################################################################
@@ -26,7 +26,7 @@ rpg.gamma <- function(num=1, h=1, z=0.0, trunc=200)
     if (length(h) != num) { h = array(h, num); }
     if (length(z) != num) { z = array(z, num); }
 
-    OUT = .C("rpg_gamma", x, h, z, as.integer(num), as.integer(trunc), PACKAGE="BayesLogit");
+    OUT = .C("rpg_gamma", x, h, z, as.integer(num), as.integer(trunc), PACKAGE="BayesLogit2");
 
     OUT[[1]]
 }
@@ -46,7 +46,7 @@ rpg.devroye <- function(num=1, n=1, z=0.0)
     if (length(n) != num) { n = array(n, num); }
     if (length(z) != num) { z = array(z, num); }
 
-    OUT = .C("rpg_devroye", x, as.integer(n), z, as.integer(num), PACKAGE="BayesLogit");
+    OUT = .C("rpg_devroye", x, as.integer(n), z, as.integer(num), PACKAGE="BayesLogit2");
 
     OUT[[1]]
 }
@@ -66,7 +66,7 @@ rpg.alt <- function(num=1, h=1, z=0.0)
     if (length(h) != num) { h = array(h, num); }
     if (length(z) != num) { z = array(z, num); }
 
-    OUT = .C("rpg_alt", x, h, z, as.integer(num), PACKAGE="BayesLogit");
+    OUT = .C("rpg_alt", x, h, z, as.integer(num), PACKAGE="BayesLogit2");
 
     OUT[[1]]
 }
@@ -89,7 +89,7 @@ rpg.sp <- function(num=1, h=1, z=0.0, track.iter=FALSE)
     if (length(z) != num) { z = array(z, num); }
 
     ## Faster if we do not track iter.
-    OUT = .C("rpg_sp", x, h, z, as.integer(num), as.integer(iter), PACKAGE="BayesLogit");
+    OUT = .C("rpg_sp", x, h, z, as.integer(num), as.integer(iter), PACKAGE="BayesLogit2");
 
     out = list()
     if (!track.iter)
@@ -115,7 +115,7 @@ rpg <- function(num=1, h=1, z=0.0)
     if (length(z) != num) { z = array(z, num); }
 
     ## Faster if we do not track iter.
-    OUT = .C("rpg_hybrid", x, h, z, as.integer(num), PACKAGE="BayesLogit");
+    OUT = .C("rpg_hybrid", x, h, z, as.integer(num), PACKAGE="BayesLogit2");
 
     OUT[[1]]
 }
@@ -179,7 +179,7 @@ rpg <- function(num=1, h=1, z=0.0)
 ##     OUT = .C("combine",
 ##              as.double(y), as.double(tX), as.double(n),
 ##              as.integer(N), as.integer(P),
-##              PACKAGE="BayesLogit");
+##              PACKAGE="BayesLogit2");
 
 ##     N = OUT[[4]];
 
@@ -234,7 +234,7 @@ rpg <- function(num=1, h=1, z=0.0)
 ##               as.double(m0), as.double(P0),
 ##               as.integer(N), as.integer(P),
 ##               as.integer(samp), as.integer(burn),
-##               PACKAGE="BayesLogit");
+##               PACKAGE="BayesLogit2");
 
 ##     N = OUT[[8]];
 
@@ -281,7 +281,7 @@ rpg <- function(num=1, h=1, z=0.0)
 ##              as.double(y), as.double(tX), as.double(n),
 ##              as.integer(N), as.integer(P),
 ##              as.double(tol), as.integer(max.iter),
-##              PACKAGE="BayesLogit");
+##              PACKAGE="BayesLogit2");
 
 ##     list("beta"=OUT[[1]], "iter"=OUT[[8]]);
 ## }
@@ -344,7 +344,7 @@ rpg <- function(num=1, h=1, z=0.0)
 ##     OUT = .C("mult_combine",
 ##              as.double(ty), as.double(tX), as.double(n),
 ##              as.integer(N), as.integer(P), as.integer(J),
-##              PACKAGE="BayesLogit");
+##              PACKAGE="BayesLogit2");
 
 ##     N = OUT[[4]];
 
@@ -400,7 +400,7 @@ rpg <- function(num=1, h=1, z=0.0)
 ##              as.double(m.0), as.double(P.0),
 ##              as.integer(N), as.integer(P), as.integer(J),
 ##              as.integer(samp), as.integer(burn),
-##              PACKAGE="BayesLogit");
+##              PACKAGE="BayesLogit2");
 
 ##     N = OUT[[8]];
 
