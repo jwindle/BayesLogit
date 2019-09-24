@@ -54,4 +54,7 @@ inline void check_R_interupt(int count)
 // Scientific functions
 #define lgamma(X) lgammafn((X))
 
+// Output
+
+
 #endif
