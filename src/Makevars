@@ -1,4 +1,4 @@
 # OBJECTS = PolyaGamma.o PolyaGammaApproxAlt.o PolyaGammaApproxSP.o InvertY.o
 # PKG_LIBS = $(BLAS_LIBS) $(FLIBS) $(LAPACK_LIBS) 
-PKG_CPPFLAGS = -DUSE_R -DNDEBUG -DNTHROW -Wall 
+PKG_CPPFLAGS = -DUSE_R -DNDEBUG -DNTHROW
 
