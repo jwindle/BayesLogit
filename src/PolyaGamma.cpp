@@ -42,7 +42,11 @@ void PolyaGamma::set_trunc(int trunc)
   #ifndef NTHROW
     throw std::invalid_argument("PolyaGamma(int trunc): trunc < 1.");
   #else
-    fprintf(stderr, "PolyaGamma(int trunc): trunc < 1.  Set trunc=1.\n");
+    #ifndef USE_R
+    fprintf(stderr, "Invalid parameter: PolyaGamma(int trunc): trunc < 1.  Setting trunc=1.\n");
+    #else
+    Rprintf("Invalid parameter: PolyaGamma(int trunc): trunc < 1.  Setting trunc=1.\n");
+    #endif
     trunc = 1;
   #endif
   }
@@ -148,7 +152,11 @@ double PolyaGamma::draw(int n, double z)
   #ifndef NTHROW
     throw std::invalid_argument("PolyaGamma::draw: n < 1.");
   #else
+    #ifndef USE_R
     fprintf(stderr, "PolyaGamma::draw: n < 1.  Set n = 1.\n");
+    #else
+    Rprintf("PolyaGamma::draw: n < 1.  Set n = 1.\n");
+    #endif
     n = 1;
   #endif
   }
