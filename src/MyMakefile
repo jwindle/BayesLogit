@@ -7,6 +7,10 @@ RLIB := $(shell Rscript --slave -e "cat(R.home('lib'))")
 
 CC = g++-8
 
+OBJ = polyagamma_hybrid.o PolyaGammaApproxSP.o InvertY.o PolyaGammaApproxAlt.o PolyaGamma.o truncated_norm.o truncated_gamma.o inverse_gaussian.o
+
+polyagamma.so: $(OBJ)
+        $(CC) $(OBS) -I $(RINC) -L $(RLIB) polyagamma.so
 
 %.o: %.cpp
 	$(CC) $< -I $(RINC) -c -o $@
