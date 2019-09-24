@@ -4,16 +4,16 @@
 #include <Rinternals.h>
 #include <stdlib.h> /* for NULL */
 #include <R_ext/Rdynload.h>
-// #include "polyagamma_wrapper.h"
+#include "polyagamma_wrapper.h"
 
 /* Skeletons of declarations of public C functions */
 
-// extern void EM(void *, void *, void *, void *, void *, void *, void *, void *);
-extern void rpg_alt(void *, void *, void *, void *);
-extern void rpg_devroye(void *, void *, void *, void *);
-extern void rpg_gamma(void *, void *, void *, void *, void *);
-extern void rpg_hybrid(void *, void *, void *, void *);
-extern void rpg_sp(void *, void *, void *, void *, void*);
+/* // extern void EM(void *, void *, void *, void *, void *, void *, void *, void *); */
+/* extern void rpg_alt(void *, void *, void *, void *); */
+/* extern void rpg_devroye(void *, void *, void *, void *); */
+/* extern void rpg_gamma(void *, void *, void *, void *, void *); */
+/* extern void rpg_hybrid(void *, void *, void *, void *); */
+/* extern void rpg_sp(void *, void *, void *, void *, void*); */
 
 /* table of C calls */
 
