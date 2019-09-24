@@ -186,7 +186,14 @@ double PolyaGammaApproxSP::sp_approx(double x, double n, double z)
 
 int PolyaGammaApproxSP::draw(double& d, double n, double z, int maxiter)
 {
-  if (n < 1) fprintf(stderr, "PolyaGammaApproxSP::draw: n must be >= 1.\n");
+  if (n < 1) {
+    #ifndef USE_R
+    fprintf(stderr, "PolyaGammaApproxSP::draw: n must be >= 1.\n");
+    #else
+    Rprintf("PolyaGammaApproxSP::draw: n must be >= 1.\n");
+    #endif
+  }
+      
   z = 0.5 * fabs(z);
 
   double xl = y_func(-1*z*z);    // Mode of phi - Left point.
