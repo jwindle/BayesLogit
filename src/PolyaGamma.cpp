@@ -71,8 +71,8 @@ double PolyaGamma::mass_texpon(double Z)
   double a = sqrt(1.0 / t) * (t * Z + 1) * -1.0;
 
   double x0 = log(fz) + fz * t;
-  double xb = x0 - Z + p_norm(b, 1);
-  double xa = x0 + Z + p_norm(a, 1);
+  double xb = x0 - Z + p_norm(b, true);
+  double xa = x0 + Z + p_norm(a, true);
 
   double qdivp = 4 / __PI * ( exp(xb) + exp(xa) );
 
