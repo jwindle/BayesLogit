@@ -65,7 +65,14 @@ double tnorm(double left)
             if (ppsl > left) return ppsl;
             check_R_interupt(count++);
             #ifndef NDEBUG
-            if (count > RCHECK * 1000) fprintf(stderr, "left < 0; count: %i\n", count);
+            if (count > RCHECK * 1000) {
+                #ifndef USE_R
+		fprintf(stderr, "left < 0; count: %i\n", count);
+                #else
+		rprintf("left < 0; count: %i\n", count);
+                #endif
+	    }
+	    p
             #endif
         }
     }
@@ -78,7 +85,13 @@ double tnorm(double left)
             if (unif() < rho) return ppsl;
             check_R_interupt(count++);
             #ifndef NDEBUG
-            if (count > RCHECK * 1000) fprintf(stderr, "left > 0; count: %i\n", count);
+            if (count > RCHECK * 1000) {
+		#ifndef USE_R
+		fprintf(stderr, "left > 0; count: %i\n", count);
+		#else
+		Rprintf("left > 0; count: %i\n", count);
+		#endif
+	    }
             #endif
         }
     }
@@ -97,13 +110,21 @@ double tnorm(double left, double right)
     if (std::isnan(right) || std::isnan(left))
     #endif
 	{
+	    #ifndef USE_R
 	    fprintf(stderr, "Warning: nan sent to tnorm: left=%g, right=%g\n", left, right);
+	    #else
+	    Rprintf("Warning: nan sent to tnorm: left=%g, right=%g\n", left, right);
+	    #endif
 	    TREOR("tnorm: parameter problem.\n", 0.5 * (left + right));
 	    // throw std::runtime_error("tnorm: parameter problem.\n");
 	}
     
     if (right < left) {
+	#ifndef USE_R
         fprintf(stderr, "Warning: left: %g, right:%g.\n", left, right);
+	#else
+        Rprintf("Warning: left: %g, right:%g.\n", left, right);
+	#endif
         TREOR("tnorm: parameter problem.\n", 0.5 * (left + right));
     }
     
@@ -118,7 +139,13 @@ double tnorm(double left, double right)
 		ppsl = texpon_rate(left, right, astar);
                 rho  = exp(-0.5*(ppsl - astar)*(ppsl-astar));
                 if (unif() < rho) return ppsl;
-		if (count > RCHECK * 10) fprintf(stderr, "left >= 0, right > lbound; count: %i\n", count);
+		if (count > RCHECK * 10) {
+		    #ifndef USE_R
+		    fprintf(stderr, "left >= 0, right > lbound; count: %i\n", count);
+		    #else
+		    Rprintf("left >= 0, right > lbound; count: %i\n", count);
+		    #endif
+		}
                 // if (ppsl < right) return ppsl;
             }
         }
@@ -129,7 +156,13 @@ double tnorm(double left, double right)
                 if (unif() < rho) return ppsl;
                 check_R_interupt(count++);
                 #ifndef NDEBUG
-                if (count > RCHECK * 10) fprintf(stderr, "left >= 0, right <= lbound; count: %i\n", count);
+                if (count > RCHECK * 10) {
+		    #ifndef USE_R
+		    fprintf(stderr, "left >= 0, right <= lbound; count: %i\n", count);
+		    #else
+		    Rprintf("left >= 0, right <= lbound; count: %i\n", count);
+		    #endif
+		}
                 #endif
             }
         }
@@ -142,7 +175,13 @@ double tnorm(double left, double right)
                 if (unif() < rho) return ppsl;
                 check_R_interupt(count++);
                 #ifndef NDEBUG
-                if (count > RCHECK * 10) fprintf(stderr, "First, left < 0, right >= 0, count: %i\n", count);
+                if (count > RCHECK * 10) {
+		    #ifndef USE_R
+		    fprintf(stderr, "First, left < 0, right >= 0, count: %i\n", count);
+		    #else
+		    Rprintf("First, left < 0, right >= 0, count: %i\n", count);
+		    #endif
+		}
                 #endif
             }
         }
@@ -152,7 +191,13 @@ double tnorm(double left, double right)
                 if (left < ppsl && ppsl < right) return ppsl;
                 check_R_interupt(count++);
                 #ifndef NDEBUG
-                if (count > RCHECK * 10) fprintf(stderr, "Second, left < 0, right > 0, count: %i\n", count);
+                if (count > RCHECK * 10) {
+		    #ifndef USE_R
+		    fprintf(stderr, "Second, left < 0, right > 0, count: %i\n", count);
+		    #else
+		    Rprintf("Second, left < 0, right > 0, count: %i\n", count);
+		    #endif
+		}
                 #endif
             }
         }
@@ -178,8 +223,13 @@ double tnorm(double left, double right, double mu, double sd)
     // I want to check this here as well so we can see what the input was.
     // It may be more elegant to try and catch tdraw.
     if (newright < newleft) {
+	#ifndef USE_R
         fprintf(stderr, "left, right, mu, sd: %g, %g, %g, %g \n", left, right, mu, sd);
         fprintf(stderr, "nleft, nright: %g, %g\n", newleft, newright);
+	#else
+        Rprintf("left, right, mu, sd: %g, %g, %g, %g \n", left, right, mu, sd);
+        Rprintf("nleft, nright: %g, %g\n", newleft, newright);
+	#endif
         TREOR("tnorm: parameter problem.\n", 0.5 * (left + right));
     }
 
@@ -189,9 +239,15 @@ double tnorm(double left, double right, double mu, double sd)
     // It may be the case that there is some numerical error and that the draw
     // ends up out of bounds.
     if (draw < left || draw > right){
+	#ifndef USE_R
         fprintf(stderr, "Error in tnorm: draw not in bounds.\n");
         fprintf(stderr, "left, right, mu, sd: %g, %g, %g, %g\n", left, right, mu, sd);
         fprintf(stderr, "nleft, nright, tdraw, draw: %g, %g, %g, %g\n", newleft, newright, tdraw, draw);
+	#else
+        Rprintf("Error in tnorm: draw not in bounds.\n");
+        Rprintf("left, right, mu, sd: %g, %g, %g, %g\n", left, right, mu, sd);
+        Rprintf("nleft, nright, tdraw, draw: %g, %g, %g, %g\n", newleft, newright, tdraw, draw);
+	#endif
         TREOR("Aborting and returning average of left and right.\n",  0.5 * (left + right));
     }
 
