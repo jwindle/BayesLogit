@@ -32,7 +32,7 @@ static const R_CMethodDef cMethods[] = {
 
 /* initialize registration */
 
-void R_init_BayesLogit(DllInfo *dll)
+void R_init_BayesLogit2(DllInfo *dll)
 {
     R_registerRoutines(dll, cMethods, NULL, NULL, NULL);
     R_useDynamicSymbols(dll, FALSE);
