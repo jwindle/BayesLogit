@@ -91,9 +91,9 @@ X = rpg(100, h, z);
 
 }
 
-\seealso{
-  \code{\link{logit.EM}}, \code{\link{logit}}, \code{\link{mlogit}}
-}
+%\seealso{
+%  \code{\link{logit.EM}}, \code{\link{logit}}
+%}
 
 \references{
   Nicholas G. Polson, James G. Scott, and Jesse Windle.  Bayesian inference for
