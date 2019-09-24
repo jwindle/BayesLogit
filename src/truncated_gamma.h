@@ -17,8 +17,9 @@
 
 
 
-// Method from Philippe, Simulation of right and left truncated gamma
-// distributions by mixtures
+// See Philippe, *Simulation of right and left truncated gamma
+// distributions by mixtures* and Dagpunar *Sampling of variates from
+// a truncated gamma distribution*
 
 #include <stdio.h>
 #include <stdexcept>
