@@ -1,9 +1,9 @@
-Package: BayesLogit2
-Version: 1.0
+Package: BayesLogit
+Version: 0.8
 Date: 2019-09-23
 Title: PolyaGamma Sampling
-Author: Nicholas G. Polson, James G. Scott, and Jesse Windle
+Author: Nicholas G. Polson [cre], James G. Scott [cre], and Jesse Windle [aut,cre], Jari Oksanen [ctb]
 Maintainer: Jesse Windle <jesse.windle@gmail.com>
 Description: Tools for sampling from the PolyaGamma distribution.  Useful for logistic regression.
 License: GPL (>=3)
-Depends: R (>= 2.14.0)
+Depends: R (>= 3.6.1)

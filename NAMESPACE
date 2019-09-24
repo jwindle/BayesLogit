@@ -1,5 +1,5 @@
 # Tell R to load the shared object <BayesLogit.so>.
-useDynLib("BayesLogit2", .registration = TRUE)
+useDynLib("BayesLogit", .registration = TRUE)
 
 # Define which functions people can see.
 # export(logit.R, logit.EM.R, rpg.gamma, rpg.devroye, rpg.alt, rpg.sp, rpg)
