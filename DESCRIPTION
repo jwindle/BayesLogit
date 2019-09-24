@@ -6,4 +6,4 @@ Author: Nicholas G. Polson [cre], James G. Scott [cre], and Jesse Windle [aut,cr
 Maintainer: Jesse Windle <jesse.windle@gmail.com>
 Description: Tools for sampling from the PolyaGamma distribution.  Useful for logistic regression.
 License: GPL (>=3)
-Depends: R (>= 3.6.1)
+Depends: R (>= 3.6.0)
