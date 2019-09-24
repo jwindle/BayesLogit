@@ -4,6 +4,7 @@
 #include <Rinternals.h>
 #include <stdlib.h> /* for NULL */
 #include <R_ext/Rdynload.h>
+// #include "polyagamma_hybrid.h"
 
 /* Skeletons of declarations of public C functions */
 
