@@ -2,7 +2,7 @@
 
 // Jesse Windle, 2019
 
-#include "polyagamma_hybrid.h"
+#include "polyagamma_wrapper.h"
 #include "PolyaGamma.h"
 #include "PolyaGammaApproxAlt.h"
 #include "PolyaGammaApproxSP.h"
