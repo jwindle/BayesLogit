@@ -49,10 +49,12 @@ double right_tgamma_beta(double shape, double rate)
     while (u > cdf) {
         cdf += omega_k(++k, a, b);
         if (k % 100000 == 0) {
-            printf("right_tgamma_beta (itr k=%i): a=%g, b=%g, u=%g, cdf=%g\n", k, a, b, u, cdf);
-#ifdef USE_R
+	    #ifndef USE_R
+            fprintf(stderr, "right_tgamma_beta (itr k=%i): a=%g, b=%g, u=%g, cdf=%g\n", k, a, b, u, cdf);
+	    #else
+	    Rprintf("right_tgamma_beta (itr k=%i): a=%g, b=%g, u=%g, cdf=%g\n", k, a, b, u, cdf);
             R_CheckUserInterrupt();
-#endif
+	    #endif
         }
     }
 
@@ -84,11 +86,19 @@ double ltgamma(double shape, double rate, double trunc)
     double b = rate * trunc;
 
     if (trunc <=0) {
+	#ifndef USE_R
         fprintf(stderr, "ltgamma: trunc = %g < 0\n", trunc);
+	#else
+        Rprintf("ltgamma: trunc = %g < 0\n", trunc);
+	#endif
         return 0;
     }
     if (shape < 1) {
+	#ifndef USE_R
         fprintf(stderr, "ltgamma: shape = %g < 1\n", shape);
+	#else
+        Rprintf("ltgamma: shape = %g < 1\n", shape);
+	#endif
         return 0;
     }
 
