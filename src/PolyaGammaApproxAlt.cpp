@@ -128,7 +128,11 @@ double PolyaGammaApproxAlt::g_tilde(double x, double h, double trunc)
 double PolyaGammaApproxAlt::draw_abridged(double h, double z, int max_inner)
 {
   if (h < 1 || h > 4) {
+    #ifndef USE_R
     fprintf(stderr, "PolyaGammaApproxAlt::draw h = %g must be in [1,4]\n", h);
+    #else
+    Rprintf("PolyaGammaApproxAlt::draw h = %g must be in [1,4]\n", h);
+    #endif
     return 0;
   }
 
@@ -219,7 +223,11 @@ double PolyaGammaApproxAlt::draw_abridged(double h, double z, int max_inner)
 double PolyaGammaApproxAlt::draw(double h, double z, int max_inner)
 {
   if (h < 1) {
+    #ifndef USE_R
     fprintf(stderr, "PolyaGammaApproxAlt::draw h = %g must be >= 1\n", h);
+    #else
+    Rprintf("PolyaGammaApproxAlt::draw h = %g must be >= 1\n", h);
+    #endif
     return 0;
   }
 
