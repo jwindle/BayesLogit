@@ -17,23 +17,28 @@
 
 
 
-// Method from Christian Robert, Simulation of truncated normal variables
+// Method from Christian Robert, *Simulation of truncated normal variables*
 
 // Code modified from <https://github.com/jwindle/BayesLogit>
 
 #include <stdio.h>
 #include <stdexcept>
 #include <cmath>
+#include "R.h"
 
 #ifndef TRUNCATED_NORM
 #define TRUNCATED_NORM
 
-// Throw runtime exception or return.
+// Throw runtime exception or print message and return.
 #ifndef TREOR
 #ifndef NTHROW
 #define TREOR(MESS, VAL) throw std::runtime_error(MESS);
 #else
+#ifndef USE_R
 #define TREOR(MESS, VAL) {fprintf(stderr, MESS); return VAL;}
+#else
+#define TREOR(MESS, VAL) {Rprintf(MESS); return VAL;}
+#endif
 #endif
 #endif
 
