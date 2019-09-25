@@ -185,7 +185,6 @@ double PolyaGammaApproxAlt::draw_abridged(double h, double z, int max_inner)
 
     int  n  = 0;
     bool go = true;
-
     // Cap the number of iterations?
     while (go && n < max_inner) {
       total_iter++;
