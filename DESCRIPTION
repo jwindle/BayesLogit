@@ -12,7 +12,7 @@ Authors@R: c(
     person("Jari", "Oksanen",
            role = c("ctb")),
     person("James", "Balamuta",
-           role = c("ctb"))
+           role = c("ctb")))
 Description: Tools for sampling from the PolyaGamma distribution based on Polson, Scott, and Windle (2013) <doi:10.1080/01621459.2013.829001>.  Useful for logistic regression.
 License: GPL (>=3)
 Depends: R (>= 3.6.0)
