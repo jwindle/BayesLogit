@@ -8,6 +8,7 @@
 \alias{rpg.sp}
 \alias{rpg.gamma.R}
 \alias{rpg.devroye.R}
+\alias{rpg.sp.R}
 
 \title{Polya-Gamma Random Variates}
 
@@ -17,14 +18,14 @@
 
 \details{
 
-  A random variable X with distribution PG(n,z) is distributed like
+  A random variable X with distribution PG(h,z) is distributed like
 
-  \deqn{ X \sim \sum_{k=1}^\infty G(n,1) / ( 2 \pi^2 (k-1/2)^2 + z^2/2). }
+  \deqn{ X \sim \sum_{k=1}^\infty G(h,1) / ( 2 \pi^2 (k-1/2)^2 + z^2/2). }
 
   The density for X may be derived by exponentially tilting the
-  PG(n,0) density:
+  PG(h,0) density:
 
-  \deqn{ p(x|n,z) \propto \exp(-x z^2/2) p(x|n,0).}
+  \deqn{ p(x|h,z) \propto \exp(-x z^2/2) p(x|h,0).}
 
   Different methods for generating this random variable are
   implemented, each of which is useful for certain parameters.  The
@@ -47,26 +48,20 @@ rpg.devroye(num=1, h=1, z=0.0)
 
 rpg.sp(num=1, h=1, z=0.0)
 
-rpg.gamma.R(num=1, n=1, z=0.0, trunc=200)
+rpg.gamma.R(num=1, h=1, z=0.0, trunc=200)
 
-rpg.devroye.R(num=1, n=1, z=0.0)
-
-rpg.sp.R(num=1, n=1, z=0.0)
+rpg.devroye.R(num=1, h=1, z=0.0)
 
 }
 
+% rpg.sp.R(num=1, h=1, z=0.0)
+
 % rpg.alt(num=1, h=1, z=0.0)
 
-% rpg.gamma.R(num=1, n=1, z=0.0, trunc=200)
-
-% rpg.devroye.R(num=1, n=1, z=0.0)
-
-% rpg.sp.R(num=1, n=1, z=0.0)
 
 \arguments{
 
   \item{num}{The number of random variates to simulate.}
-  \item{n}{Shape parameter, a positive integer.}
   \item{h}{Shape parameter.  \code{h} must be >= 1 if not using sum of gammas method.}
   \item{z}{Parameter associated with tilting.}
   \item{trunc}{The number of elements used in sum of gammas approximation.}
