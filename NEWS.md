@@ -9,5 +9,5 @@ The new package and repository (<https://github.com/jwindle/BayesLogit>) has
 been slimmed down and now is focused on implementation of PolyaGamma sampling
 methods.
 
-Thanks to to Jari Oksanen and James Balamuta for their help in getting the
+Thanks go to Jari Oksanen and James Balamuta for their help in getting the
 package ready for CRAN. 
