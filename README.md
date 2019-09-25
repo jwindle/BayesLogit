@@ -8,6 +8,8 @@ The original `BayesLogit` package source can be found here:
 
 <https://github.com/jwindle/BayesLogit-Thesis>
 
+Check the latest [news](NEWS.md)
+
 ## License
 
 GPL (>= 3)
