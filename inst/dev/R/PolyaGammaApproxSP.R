@@ -62,13 +62,13 @@ v.func.1 <- function(y)
   out
 }
 
-v.func.1.alt <- function(y, lowerb, upperb)
-{
-  if (y==1) return(list(root=0.0, f.root=1.0, iter=0, estim.prec=1e-16))
-  f <- function(v) { y - y.func(v) }
-  out = uniroot(f, lower=lowerb, upper=upperb, maxiter=10000, tol=1e-8)
-  out
-}
+## v.func.1.alt <- function(y, lowerb, upperb)
+## {
+##   if (y==1) return(list(root=0.0, f.root=1.0, iter=0, estim.prec=1e-16))
+##   f <- function(v) { y - y.func(v) }
+##   out = uniroot(f, lower=lowerb, upper=upperb, maxiter=10000, tol=1e-8)
+##   out
+## }
 
 v.secant.1 <- function(y, vb, va, tol=1e-8, maxiter=10)
 {
@@ -141,29 +141,29 @@ v.iterative <- function(y, ygrid, vgrid, dy)
 
 ################################################################################
 
-if (FALSE) {
-  dyl   = 0.01
-  yleft = seq(0.1, 1, dyl)
-  vleft = v.func(yleft)
+## if (FALSE) {
+##   dyl   = 0.01
+##   yleft = seq(0.1, 1, dyl)
+##   vleft = v.func(yleft)
 
-  dyr    = 0.01
-  yright = seq(1, 8, dyr)
-  vright = v.func(yright)
-}
+##   dyr    = 0.01
+##   yright = seq(1, 8, dyr)
+##   vright = v.func(yright)
+## }
 
-v.table <- function(y)
-{
-  out = 0
-  if (y <= 1)
-    out = v.iterative(y, yleft, vleft, dyl)
-  else
-    out = v.iterative(y, yright, vright, dyr)
+## v.table <- function(y)
+## {
+##   out = 0
+##   if (y <= 1)
+##     out = v.iterative(y, yleft, vleft, dyl)
+##   else
+##     out = v.iterative(y, yright, vright, dyr)
 
-  if (is.na(out))
-    out = v.approx(y)
+##   if (is.na(out))
+##     out = v.approx(y)
 
-  out
-}
+##   out
+## }
 
 ################################################################################
                    ## CALCULATE SADDLE POINT APPROXIMATION ##
@@ -793,7 +793,7 @@ sp.sampler.1 <- function(n=1, z=0, maxiter=100)
 
   # old method
   wr = ar^0.5 * (0.5*n/pi)^0.5 * exp(-n * log(n * rr) + n * ir - n * log(mid)) *
-    gamma(n) * pgamma(mid, shape=n, rate=n*rr, lower=FALSE)
+    gamma(n) * pgamma(mid, shape=n, rate=n*rr, lower.tail=FALSE)
   
   wt = wl + wr
   pl = wl / wt
@@ -848,7 +848,7 @@ sp.sampler <- function(num, n=1, z=0, return.df=FALSE)
   df
 }
 
-rpg.sp.R <- function(num, h=1, z=0, return.df=FALSE)
+rpg.sp.R <- function(num=1, h=1, z=0)
 {
   n = h
   z = 0.5 * z;
@@ -860,8 +860,8 @@ rpg.sp.R <- function(num, h=1, z=0, return.df=FALSE)
     df$iter[i] = temp$iter
   }
   df$x = 0.25 * n * df$x
-  if (!return.df) df = df$x
-  df
+  # if (!return.df) df = df$x
+  df$x
 }
 
 ##------------------------------------------------------------------------------
