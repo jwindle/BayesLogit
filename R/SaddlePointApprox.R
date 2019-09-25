@@ -20,7 +20,7 @@
 
 ## source("Ch.R")
 
-a.coef <- function(n, x, h, z)
+a.coef.sp <- function(n, x, h, z)
 {
   ## a_n(x,h).
   ## You could precompute lgamma(h), log(2).
@@ -282,7 +282,7 @@ if (FALSE)
     y1[i] = 0
     y2[i] = 0
     for (j in 0:200) {
-      y1[i] = y1[i] + (-1)^j * a.coef(j,xgrid[i] * n ,n, z) * n
+      y1[i] = y1[i] + (-1)^j * a.coef.sp(j,xgrid[i] * n ,n, z) * n
     }
   }
 
