@@ -192,6 +192,7 @@ int PolyaGammaApproxSP::draw(double& d, double n, double z, int maxiter)
     #else
     Rprintf("PolyaGammaApproxSP::draw: n must be >= 1.\n");
     #endif
+    return -1.;
   }
       
   z = 0.5 * fabs(z);
@@ -239,14 +240,30 @@ int PolyaGammaApproxSP::draw(double& d, double n, double z, int maxiter)
   // Weights
   double wl, wr, wt, pl;
 
+
+  // // to cross-reference R script
+  // double term1, term2, term3, term4, term5;
+  // term1 = exp(0.5 * log(al));
+  // term2 = exp(- n * rt2rl + n * il + 0.5 * n * 1./md);
+  // term3 = p_igauss(md, 1./rt2rl, n);
+  // printf("l terms 1-3: %g, %g, %g\n", term1, term2, term3);
+  
   wl = exp(0.5 * log(al) - n * rt2rl + n * il + 0.5 * n * 1./md) * 
     p_igauss(md, 1./rt2rl, n);
 
-  wr = exp(0.5 * log(ar) + lcn - n * log(n * rr) + n * ir - n * log(md)) *
-    // yv.upperIncompleteGamma(md, n, n*rr);
-    exp(lgamma(n)) * (1.0 - p_gamma_rate(md, n, n*rr, false));
+  // // to cross-reference R script
+  // term1 = exp(0.5 * log(ar));
+  // term2 = exp(lcn);
+  // term3 = exp(- n * log(n * rr) + n * ir - n * log(md));
+  // term4 = exp(lgamma(n));
+  // term5 = (1.0 - p_gamma_rate(md, n, n*rr, false));
+  // printf("r terms 1-5: %g, %g, %g, %g, %g\n", term1, term2, term3, term4, term5);
+  
+  wr = exp(0.5 * log(ar) + lcn + (- n * log(n * rr) + n * ir - n * log(md) + lgamma(n)) ) *
+    (1.0 - p_gamma_rate(md, n, n*rr, false));
+  // yv.upperIncompleteGamma(md, n, n*rr);
 
-  // printf("wl, wr: %g, %g\n", wl, wr);
+  // printf("wl, wr, lcn: %g, %g, %g\n", wl, wr, lcn);
 
   wt = wl + wr;
   pl = wl / wt;
