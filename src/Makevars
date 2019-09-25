@@ -1,4 +1,9 @@
 # OBJECTS = PolyaGamma.o PolyaGammaApproxAlt.o PolyaGammaApproxSP.o InvertY.o
-# PKG_LIBS = $(BLAS_LIBS) $(FLIBS) $(LAPACK_LIBS) 
+# PKG_LIBS = $(BLAS_LIBS) $(FLIBS) $(LAPACK_LIBS)
+
+# For submitting
 PKG_CPPFLAGS = -DUSE_R -DNDEBUG -DNTHROW
+
+# For debugging -- need to remove manually definition of NDEBUG
+# PKG_CPPFLAGS = -DUSE_R -DNTHROW
 
