@@ -114,7 +114,7 @@ void rpg_sp(double *x, double *h, double *z, int* num, int *iter)
 
 void rpg_hybrid(double *x, double *h, double *z, int* num)
 {
-    PolyaGamma dv;
+    PolyaGamma dv(1000);
     // PolyaGammaApproxAlt alt;
     PolyaGammaApproxSP sp;
 
