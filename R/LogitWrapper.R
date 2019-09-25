@@ -25,12 +25,10 @@ rpg.gamma <- function(num=1, h=1, z=0.0, trunc=200)
 {
     ## Check Parameters.
     if (sum(h<0)!=0) {
-        print("h must be greater than zero.");
-        return(NA);
+        stop("rpg.gamma: h must be greater than zero.");
     }
     if (trunc < 1) {
-        print("trunc must be > 0.");
-        return(NA);
+        stop("rpg.gamma: xtrunc must be > 0.");
     }
 
     x = rep(0, num);
@@ -45,12 +43,13 @@ rpg.gamma <- function(num=1, h=1, z=0.0, trunc=200)
 
 ## Draw PG(n, z) where n is a natural number.
 ##------------------------------------------------------------------------------
-rpg.devroye <- function(num=1, n=1, z=0.0)
+rpg.devroye <- function(num=1, h=1, z=0.0)
 {
+    n = h
+    
     ## Check Parameters.
     if (any(n<0)) {
-      print("n must be greater than zero.");
-      return(NA);
+      stop("rpg.devroye: h must be greater than zero.");
     }
 
     x = rep(0, num);
@@ -69,8 +68,7 @@ rpg.alt <- function(num=1, h=1, z=0.0)
 {
     ## Check Parameters.
     if (any(h<1)) {
-      print("h must be >= 1.");
-      return(NA);
+      stop("rpg.alt: h must be >= 1.");
     }
 
     x = rep(0, num);
@@ -86,12 +84,11 @@ rpg.alt <- function(num=1, h=1, z=0.0)
 
 ## Draw PG(h, z) using SP approx where h is \geq 1.
 ##------------------------------------------------------------------------------
-rpg.sp <- function(num=1, h=1, z=0.0, track.iter=FALSE)
+rpg.sp <- function(num=1, h=1, z=0.0)
 {
     ## Check Parameters.
     if (any(h<1)) {
-      print("h must be >= 1.");
-      return(NA);
+      stop("rpg.sp: h must be >= 1.");
     }
 
     x = rep(0, num);
@@ -103,12 +100,15 @@ rpg.sp <- function(num=1, h=1, z=0.0, track.iter=FALSE)
     ## Faster if we do not track iter.
     OUT = .C("rpg_sp", x, h, z, as.integer(num), as.integer(iter), PACKAGE="BayesLogit");
 
-    out = list()
-    if (!track.iter)
-      out = OUT[[1]]
-    else
-      out = list(samp=OUT[[1]], iter=OUT[[5]])
-    out
+    ## ## Tracking total iterations
+    ## out = list() 
+    ## if (!track.iter)
+    ##   out = OUT[[1]]
+    ## else
+    ##   out = list(samp=OUT[[1]], iter=OUT[[5]])
+    ## out
+
+    OUT[[1]]
 }
 
 ## Draw PG(n, z)
@@ -117,8 +117,7 @@ rpg <- function(num=1, h=1, z=0.0)
 {
     ## Check Parameters.
     if (any(h<=0)) {
-      print("h must be > 0.");
-      return(NA);
+      stop("rpg: h must be > 0.");
     }
 
     x = rep(0, num);
