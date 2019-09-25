@@ -135,9 +135,10 @@ void rpg_hybrid(double *x, double *h, double *z, int* num)
         else if (b==1 || b==2) {
             x[i] = dv.draw((int)b, z[i]);
         }
-        else if (b > 1) {
-            x[i] = alt.draw(b, z[i]);
-        }
+	// Need to review "alt" sampler.
+        // else if (b > 1) {
+        //     x[i] = alt.draw(b, z[i]);
+        // }
         else if (b > 0) {
             x[i] = dv.draw_sum_of_gammas(b, z[i]);
         }
