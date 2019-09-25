@@ -202,8 +202,10 @@ rpg.devroye.1 <- function(Z)
 ## Sample from PG(n, Z) using Devroye-like method.
 ## n is a natural number and z is a positive real.
 ##------------------------------------------------------------------------------
-rpg.devroye.R <- function(num=1, n=1, z=0.0)
+rpg.devroye.R <- function(num=1, h=1, z=0.0)
 {
+  n = h
+    
   z = array(z, num);
   n = array(n, num);
 
@@ -219,36 +221,36 @@ rpg.devroye.R <- function(num=1, n=1, z=0.0)
       total.trials = total.trials + temp$n;
     }
   }
+  ## list("x"=x, "rate"=sum(n)/total.trials)
   x
-  list("x"=x, "rate"=sum(n)/total.trials)
 }
 
 ################################################################################
 ## PG(1.0, Z) - ACCEPT/REJECT ##
 ################################################################################
 
+## NEED TO RENAME!!!
+## rpg.alt.1 <- function(Z)
+## {
+##   alpha = 0.0;
+##   while ( runif(1) > alpha ) {
+##     X = rpg.devroye.1(0);
+##     alpha = exp(-0.5 * (Z*0.5)^2 * X);
+##   }
+##   X
+## }
 
-rpg.alt.1 <- function(Z)
-{
-  alpha = 0.0;
-  while ( runif(1) > alpha ) {
-    X = rpg.devroye.1(0);
-    alpha = exp(-0.5 * (Z*0.5)^2 * X);
-  }
-  X
-}
-
-## Sample PG(1.0, Z) using accept/reject.
-##------------------------------------------------------------------------------
-rpg.alt.R <- function(num=1, Z=0.0)
-{
-  Z = array(Z, num);
-  x = rep(0, num);
-  for (i in 1:num) {
-    x[i] = rpg.alt.1(Z[i]);
-  }
-  x
-}
+## ## Sample PG(1.0, Z) using accept/reject.
+## ##------------------------------------------------------------------------------
+## rpg.alt.R <- function(num=1, Z=0.0)
+## {
+##   Z = array(Z, num);
+##   x = rep(0, num);
+##   for (i in 1:num) {
+##     x[i] = rpg.alt.1(Z[i]);
+##   }
+##   x
+## }
 
 ################################################################################
                          ## PG(n, Z) - Sum of Gammas ##
@@ -256,10 +258,11 @@ rpg.alt.R <- function(num=1, Z=0.0)
 
 ## Sample PG(n, z) using sum of Gammas representation.
 ##------------------------------------------------------------------------------
-rpg.gamma.R <-function(num=1, n=1, z=0.0, trunc=200)
+rpg.gamma.R <-function(num=1, h=1, z=0.0, trunc=200)
 {
+  n = h
   w = rep(0, num);
-  c.i = (1:200-1/2)^2 * pi^2 * 4
+  c.i = (1:trunc-1/2)^2 * pi^2 * 4
   a.i = c.i + z^2;
   for(i in 1:num){
     w[i] = 2.0 * sum(rgamma(trunc,n)/a.i)
@@ -309,176 +312,3 @@ if (FALSE) {
 
 }
 
-## test.igauss(20.0, 10000);
-
-################################################################################
-## Covergence ##
-################################################################################
-
-if (FALSE) {
-
-  M = 100000
-  X = matrix(nrow=M, ncol=3)
-  for (i in 1:M) {
-    X[i,] = as.numeric(rpg.devroye.1(1.37))
-  }
-  colMeans(X)
-
-}
-
-################################################################################
-## Wald's Theorem Stuff ##
-################################################################################
-
-int.l.coef <- function(x, n, z)
-{
-  j = 2 * n + 1;
-  mu = j / z;
-  lambda = j^2;
-
-  term.1 = 2 * cosh(z) * exp(-1.0 * z * j);
-  term.2 = pigauss(x, mu, lambda)
-
-  term.1 * term.2
-}
-
-int.r.coef <- function(x, n, z)
-{
-  j = n + 0.5;
-
-  term.1 = cosh(z) * pi * j;
-  term.2 = 0.5 * (z^2 + j^2 * pi^2);
-  term.3 = exp(-1 * x * term.2);
-  out = term.1 / term.2 * term.3;
-
-  out
-}
-
-## x is truncation point.
-int.a <- function(x, n, z)
-{
-  int.l.coef(x,n,z) + int.r.coef(x,n,z);
-}
-
-A = int.a(0.64, 0:1000, 0.0)
-sum(A)
-prob = (A[-1000] - A[-1]) / sum(A);
-
-################################################################################
-## Trying to find best split of z for IGauss ##
-################################################################################
-
-ig.diff <- function(z) {
-  t = 2 / pi
-  pigauss(t, 1/z, 1.0) - pigauss(t, 1/z, 1) * exp(-z) / pgamma(1/t, 1/2, rate=1/2, lower.tail=FALSE);
-}
-
-## Using rigauss things look okay.
-
-rtig.temp <- function(Z, R=2/pi, N)
-{
-  Y = 1:N
-  num.iter = 0;
-  for (i in 1:N){
-    X = R + 1;
-    alpha = 0.0;
-    while (runif(1) > alpha) {
-      num.iter = num.iter + 1;
-      E = rexp(2)
-      while ( E[1]^2 > 2 * E[2] / R) {
-        E = rexp(2)
-      }
-      X = R / (1 + R*E[1])^2
-      alpha = exp(-0.5 * Z^2 * X);
-    }
-    Y[i] = X
-  }
-
-  out = list("X"=Y, "a"=N/num.iter)
-  out
-}
-
-if (FALSE) {
-  
-  out <- uniroot(ig.diff, c(0,10))
-  
-}
-
-################################################################################
-                     ## Check rejection rate by sampling ##
-################################################################################
-
-if (FALSE) {
-  Z = 1.37
-  outp <- mass.detail(Z);
-  samp <- rpg.devroye.R(100000, 1.0, Z);
-  
-  1/outp$c
-  samp$rate
-}
-
-################################################################################
-                   ## CALCULATING AVERAGE NUMBER OF DRAWS ##
-################################################################################
-
-if (FALSE) {
-
-  tk = TRUNC
-  ## tk = 2
-  
-  ## source("PG.R")
-  zgrid = seq(0.0, 6, 0.001);
-  out   = zgrid
-  p = q = zgrid
-  len   = length(zgrid)
-  ig.accept = zgrid;
-  
-  for (i in 1:len) {
-    Z = zgrid[i]
-    fz = pi^2 / 8 + Z^2 / 2;
-    p[i] = cosh(Z) * (0.5 * pi) * exp( -1.0 * fz * tk) / fz;
-    q[i] = cosh(Z) * 2 * exp(-1.0 * Z) * pigauss(tk, 1.0/Z, 1.0);
-    ig.accept[i] = exp(-1.0 * Z) * pigauss(tk, 1.0/Z, 1.0) / pgamma(1/tk, 1/2, 1/2, lower.tail=FALSE)
-    out[i] = p[i] + q[i];
-  }
-
-  plot(zgrid, out)
-  
-}
-
-################################################################################
-                   ## CALCULATING AVERAGE PROB OF STOPPING ##
-################################################################################
-
-if (FALSE) {
-
-  tk = TRUNC
-  ## tk = 2
-  
-  ## source("PG.R")
-  n.terms = 16
-  lower = 0:n.terms
-  upper = 0:n.terms
-  int.a = 0:n.terms
-
-  Z = 1.378
-  fz = pi^2 / 8 + Z^2 / 2;
-  p = cosh(Z) * (0.5 * pi) * exp( -1.0 * fz * tk) / fz;
-  q = cosh(Z) * 2 * exp(-1.0 * Z) * pigauss(tk, 1.0/Z, 1.0);
-
-  c.z = p + q;
-  
-  for (n in 0:n.terms) {
-    d.n = 2*n+1
-    mu.n = d.n / Z
-    lambda.n = d.n^2
-    y.n = 0.5 * (Z^2 + (n + 1/2)^2 * pi^2)
-    lower[n+1] = 2 * exp(-d.n*Z) * pigauss(tk, mu.n, lambda.n)
-    upper[n+1] = 0.5 * pi * d.n / y.n * exp(-y.n * tk)
-    int.a[n+1] = lower[n+1] + upper[n+1]
-  }
-
-  prob.n = cosh(Z) * (int.a[-n.terms-1] - int.a[-1]) / c.z
-  tail   = rev(cumsum(rev(prob.n)))
-  
-}
