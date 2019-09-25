@@ -4,10 +4,10 @@
 \alias{rpg}
 \alias{rpg.devroye}
 \alias{rpg.gamma}
-\alias{rpg.alt}
+%\alias{rpg.alt}
 \alias{rpg.sp}
-%\alias{rpg.gamma.R}
-%\alias{rpg.devroye.R}
+\alias{rpg.gamma.R}
+\alias{rpg.devroye.R}
 
 \title{Polya-Gamma Random Variates}
 
@@ -26,10 +26,12 @@
 
   \deqn{ p(x|n,z) \propto \exp(-x z^2/2) p(x|n,0).}
 
-  Several different methods for generating this random variable are
-  implemented.  The parameters supplied by the user automatically
-  determine which method is used.  One may manually call each routine
-  using \code{rpg.METHOD}.
+  Different methods for generating this random variable are
+  implemented, each of which is useful for certain parameters.  The
+  parameters supplied by the user automatically determine which method
+  is used.  One may manually call each routine using
+  \code{rpg.METHOD}.  Functions ending in ".R" are pure R
+  implementations.
 
   You may call rpg when n and z are vectors.
 
@@ -41,17 +43,25 @@ rpg(num=1, h=1, z=0.0)
 
 rpg.gamma(num=1, h=1, z=0.0, trunc=200)
 
-rpg.devroye(num=1, n=1, z=0.0)
+rpg.devroye(num=1, h=1, z=0.0)
 
-rpg.alt(num=1, h=1, z=0.0)
+rpg.sp(num=1, h=1, z=0.0)
 
-rpg.sp(num=1, h=1, z=0.0, track.iter=FALSE)
+rpg.gamma.R(num=1, n=1, z=0.0, trunc=200)
+
+rpg.devroye.R(num=1, n=1, z=0.0)
+
+rpg.sp.R(num=1, n=1, z=0.0)
 
 }
+
+% rpg.alt(num=1, h=1, z=0.0)
 
 % rpg.gamma.R(num=1, n=1, z=0.0, trunc=200)
 
 % rpg.devroye.R(num=1, n=1, z=0.0)
+
+% rpg.sp.R(num=1, n=1, z=0.0)
 
 \arguments{
 
@@ -60,8 +70,9 @@ rpg.sp(num=1, h=1, z=0.0, track.iter=FALSE)
   \item{h}{Shape parameter.  \code{h} must be >= 1 if not using sum of gammas method.}
   \item{z}{Parameter associated with tilting.}
   \item{trunc}{The number of elements used in sum of gammas approximation.}
-  \item{track.iter}{The number of proposals made before accepting.}
 }
+
+%  \item{track.iter}{The number of proposals made before accepting.}
 
 \value{
 
