@@ -40,6 +40,7 @@ double p_igauss(double x, double mu, double lambda)
     double z = 1 / mu;
     double b = sqrt(lambda / x) * (x * z - 1);
     double a = sqrt(lambda / x) * (x * z + 1) * -1.0;
-    double y = p_norm(b, false) + exp(2 * lambda * z) * p_norm(a, false);
+    // double y = p_norm(b, false) + exp(2 * lambda * z) * p_norm(a, false);
+    double y = p_norm(b, false) + exp(2 * lambda * z + p_norm(a, true));
     return y;
 }
