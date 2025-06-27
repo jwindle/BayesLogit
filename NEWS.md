@@ -1,9 +1,9 @@
-# June 27, 2025
+# BayesLogit 2.2 (2025-06-27)
 
 - Minor edits to comply with CRAN NOTEs in CITATION.
 - Minor edits to NEWS.md to avoid CRAN NOTE about NEWS.md.
 
-# September 25, 2019
+# BayesLogit 2.1 (2019-09-25)
 
 - BayesLogit has been completely re-organized. Previously, the package was
   derived from a repository used for a doctoral thesis, and included many
