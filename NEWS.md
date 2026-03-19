@@ -1,7 +1,15 @@
-# BayesLogit 2.2 (2025-06-27)
+# BayesLogit 2.3 (2026-03-19)
 
-- Minor edits to comply with CRAN NOTEs in CITATION.
-- Minor edits to NEWS.md to avoid CRAN NOTE about NEWS.md.
+- Updated CITATION to use `bibentry()` replacing deprecated `citEntry()` and `personList()`.
+- Added published JASA article to citations.
+- Fixed stale and broken URLs (`http://` to `https://`, removed broken thesis repo link).
+- Renamed internal functions with dots in names to avoid false S3 method detection.
+- Updated package metadata (version, date, URL field).
+
+# BayesLogits 2.2 (2025-06-27)
+
+-Maintenance release: updated CITATION to use `bibentry()`, fixed stale URLs,
+-added published JASA article to citations, and updated package metadata.
 
 # BayesLogit 2.1 (2019-09-25)
 

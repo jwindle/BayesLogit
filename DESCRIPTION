@@ -1,6 +1,6 @@
 Package: BayesLogit
-Version: 2.2
-Date: 2025-06-27
+Version: 2.3
+Date: 2026-03-19
 Title: PolyaGamma Sampling
 Authors@R: c(
     person("Nicholas G.", "Polson", 

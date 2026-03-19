@@ -104,7 +104,7 @@ X = rpg(100, h, z);
 \references{
   Nicholas G. Polson, James G. Scott, and Jesse Windle.  Bayesian inference for
   logistic models using Polya-Gamma latent variables.
-  \url{http://arxiv.org/abs/1205.0310}
+  \url{https://arxiv.org/abs/1205.0310}
 }
 
 \keyword{rpg}
