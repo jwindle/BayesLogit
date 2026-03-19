@@ -96,7 +96,7 @@ k2.mgf <- function(t,z=0)
 
 ################################################################################
 
-log.cos.rt <- function(u)
+log_cos_rt <- function(u)
 {
   r   = sqrt(abs(u))
   out = log(cosh(r))
@@ -104,7 +104,7 @@ log.cos.rt <- function(u)
   out
 }
 
-log.sin.rt <- function(u)
+log_sin_rt <- function(u)
 {
   r   = sqrt(abs(u))
   out = log(sinh(r))
@@ -116,7 +116,7 @@ u.dens <- function(u, n=1, z=0)
 {
   x = utox.mgf(u)
   out = 0.5 * cosh(z)^n * (0.5*n/pi)^0.5 * (x^2 + (1-x) / u)^0.5 *
-    exp(-n * log.cos.rt(u) - n * 0.5 * (u+z^2) * x);
+    exp(-n * log_cos_rt(u) - n * 0.5 * (u+z^2) * x);
   out
 }
 
@@ -124,7 +124,7 @@ u.dens.2 <- function(u, n=1, z=0)
 {
   x = utox.mgf(u)
   out = 0.5 * cosh(z)^n * (0.5*n/pi)^0.5 * (x^2 + (1-x) / u)^0.5 *
-    exp(-n * (log.sin.rt(u) - log(sqrt(abs(u))) - log(x)) - n * 0.5 * (u+z^2) * x);
+    exp(-n * (log_sin_rt(u) - log(sqrt(abs(u))) - log(x)) - n * 0.5 * (u+z^2) * x);
   out
 }
 
@@ -132,7 +132,7 @@ u.a1 <- function(u, n=1, z=0)
 {
   x = 1 + 1/3 * u + 3/15 * u^2
   out = 0.5 * cosh(z)^n * (0.5*n/pi)^0.5 * (x^2 + (1-x) / u)^0.5 *
-    exp(-n * log.cos.rt(u) - n * 0.5 * (u+z^2) * x);
+    exp(-n * log_cos_rt(u) - n * 0.5 * (u+z^2) * x);
   out
 }
 
@@ -148,7 +148,7 @@ x.dens.1 <- function(u, n=1, z=0)
 {
   x = utox.mgf(u)
   out = cosh(z)^n * (0.5*n/pi)^0.5 * (x^2 + (1-x) / u)^(-0.5) *
-    exp(-n * log.cos.rt(u) - n * 0.5 * (u+z^2) * x);
+    exp(-n * log_cos_rt(u) - n * 0.5 * (u+z^2) * x);
   out
 }
 
@@ -156,7 +156,7 @@ x.dens.2 <- function(u, n=1, z=0)
 {
   x = utox.mgf(u)
   out = cosh(z)^n * (0.5*n/pi)^0.5 * (x^2 + (1-x) / u)^(-0.5) *
-    exp(-n * (log.sin.rt(u) - log(sqrt(abs(u))) - log(x))
+    exp(-n * (log_sin_rt(u) - log(sqrt(abs(u))) - log(x))
         - n * 0.5 * (u+z^2) * x);
   out
 }
@@ -389,18 +389,18 @@ if (FALSE)
 
   ## Key here for approximation.  Use second order approx below.  I think second
   ## is better because we then have x^n for large x.
-  plot(xgrid, log.cos.rt(ugrid) + 0.5)
-  plot(xgrid, log.sin.rt(ugrid) - 0.5 * log(abs(ugrid)))
+  plot(xgrid, log_cos_rt(ugrid) + 0.5)
+  plot(xgrid, log_sin_rt(ugrid) - 0.5 * log(abs(ugrid)))
 
-  b1 = log.cos.rt(ugrid) + 0.5 * ugrid * xgrid
-  b2 = log.sin.rt(ugrid) -  0.5 * log(abs(ugrid)) - log(xgrid) + 0.5 * ugrid * xgrid
+  b1 = log_cos_rt(ugrid) + 0.5 * ugrid * xgrid
+  b2 = log_sin_rt(ugrid) -  0.5 * log(abs(ugrid)) - log(xgrid) + 0.5 * ugrid * xgrid
 
   plot(xgrid, b1)
   plot(xgrid, b2)
   lines(xgrid, -log(xgrid), col=2)
 
   ## z = 0.0
-  b3 = log.sin.rt(ugrid) - 0.5 * log(abs(ugrid)) + 0.5 * ugrid * xgrid + 0.5 * z^2 * xgrid
+  b3 = log_sin_rt(ugrid) - 0.5 * log(abs(ugrid)) + 0.5 * ugrid * xgrid + 0.5 * z^2 * xgrid
   b4 = (xgrid^2 + (1-xgrid) / ugrid)
   
   plot(xgrid, b3)
@@ -415,7 +415,7 @@ if (FALSE)
   iggrid = (a * xgrid + b / xgrid) - 1.3
   lines(xgrid, iggrid, col=2)
 
-  b5 = log.sin.rt(ugrid) - 0.5 * log(abs(ugrid))
+  b5 = log_sin_rt(ugrid) - 0.5 * log(abs(ugrid))
   plot(xgrid, b5)
   plot(xgrid, ugrid * xgrid)
 
@@ -470,7 +470,7 @@ if (FALSE)
   lines(ugrid, udens4, col=4)
   lines(ugrid, udens5, col=5)
 
-  blah1 = - log.cos.rt(ugrid)
+  blah1 = - log_cos_rt(ugrid)
   blah2 = log(pi/2) + log(xgrid)
 
   ##----------------------------------------------------------------------------
@@ -485,7 +485,7 @@ if (FALSE)
     }
 
   lwf.1 = lw.fact(ugrid, n)
-  lwf.2 = n * log.cos.rt(ugrid)
+  lwf.2 = n * log_cos_rt(ugrid)
 
   plot(ugrid, lwf.1)
   plot(ugrid, lwf.2)

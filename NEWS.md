@@ -1,4 +1,13 @@
-# September 25, 2019
+# BayesLogit 2.1.1
+
+## March 19, 2026
+
+Maintenance release: updated CITATION to use `bibentry()`, fixed stale URLs,
+added published JASA article to citations, and updated package metadata.
+
+# BayesLogit 2.1
+
+## September 25, 2019
 
 BayesLogit has been completely re-organized. Previously, the package was derived
 from a repository used for a doctoral thesis, and included many items beyond

@@ -37,7 +37,7 @@ a.coef.alt <- function(n, x, h)
   out
 }
 
-c.2.coef <- function(n, x)
+c2coef <- function(n, x)
 {
   c.n = (n+1/2) * pi
   out = (1 - 1/(x*c.n^2)) * c.n^2 * x * exp(-c.n^2 * x / 2)
@@ -281,7 +281,7 @@ if (FALSE)
     y2[i] = 0
     for (j in 0:200) {
       y1[i] = y1[i] + (-1)^j * a.coef.alt(j,xgrid[i],2)
-      y2[i] = y2[i] + c.2.coef(j,xgrid[i])
+      y2[i] = y2[i] + c2coef(j,xgrid[i])
     }
     
   }
