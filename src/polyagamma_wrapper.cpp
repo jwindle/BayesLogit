@@ -25,6 +25,128 @@
 #include "PolyaGammaApproxSP.h"
 #include "simple_RNG_wrapper.h"
 
+double BayesLogit_rpg_gamma(double h, double z, int trunc)
+{
+    PolyaGamma pg(trunc);
+    return h != 0.0 ? pg.draw_sum_of_gammas(h, z) : 0.0;
+}
+
+void BayesLogit_rpg_gamma_fill(int num, const double *h, const double *z,
+                               int trunc, double *out)
+{
+    PolyaGamma pg(trunc);
+
+    for(int i=0; i < num; ++i){
+#ifdef USE_R
+        if (i % 1000 == 0) R_CheckUserInterrupt();
+#endif
+        out[i] = h[i] != 0.0 ? pg.draw_sum_of_gammas(h[i], z[i]) : 0.0;
+    }
+}
+
+double BayesLogit_rpg_devroye(int h, double z)
+{
+    PolyaGamma pg(1);
+    return h != 0 ? pg.draw(h, z) : 0.0;
+}
+
+void BayesLogit_rpg_devroye_fill(int num, const int *h, const double *z,
+                                 double *out)
+{
+    PolyaGamma pg(1);
+
+    for(int i=0; i < num; ++i)
+        out[i] = h[i] != 0 ? pg.draw(h[i], z[i]) : 0.0;
+}
+
+double BayesLogit_rpg_sp(double h, double z, int *iter)
+{
+    double out = 0.0;
+    PolyaGammaApproxSP pg;
+
+    if (h != 0.0)
+        *iter = pg.draw(out, h, z);
+    else
+        *iter = 0;
+
+    return out;
+}
+
+void BayesLogit_rpg_sp_fill(int num, const double *h, const double *z,
+                            double *out, int *iter)
+{
+    PolyaGammaApproxSP pg;
+
+    for(int i=0; i < num; ++i){
+        if (h[i] != 0.0)
+            iter[i] = pg.draw(out[i], h[i], z[i]);
+        else {
+            out[i] = 0.0;
+            iter[i] = 0;
+        }
+    }
+}
+
+double BayesLogit_rpg_hybrid(double h, double z)
+{
+    PolyaGamma dv(1000);
+    PolyaGammaApproxSP sp;
+
+    if (h > 170) {
+        double m = dv.pg_m1(h, z);
+        double v = dv.pg_m2(h, z) - m*m;
+        return norm(m, sqrt(v));
+    }
+    else if (h > 13) {
+        double out = 0.0;
+        sp.draw(out, h, z);
+        return out;
+    }
+    else if (h == 1 || h == 2) {
+        return dv.draw((int)h, z);
+    }
+    // Need to review "alt" sampler.
+    // else if (h > 1) {
+    //     return alt.draw(h, z);
+    // }
+    else if (h > 0) {
+        return dv.draw_sum_of_gammas(h, z);
+    }
+
+    return 0.0;
+}
+
+void BayesLogit_rpg_hybrid_fill(int num, const double *h, const double *z,
+                                double *out)
+{
+    PolyaGamma dv(1000);
+    PolyaGammaApproxSP sp;
+
+    for(int i=0; i < num; ++i){
+        double b = h[i];
+        if (b > 170) {
+            double m = dv.pg_m1(b, z[i]);
+            double v = dv.pg_m2(b, z[i]) - m*m;
+            out[i] = norm(m, sqrt(v));
+        }
+        else if (b > 13) {
+            sp.draw(out[i], b, z[i]);
+        }
+        else if (b == 1 || b == 2) {
+            out[i] = dv.draw((int)b, z[i]);
+        }
+        // Need to review "alt" sampler.
+        // else if (b > 1) {
+        //     out[i] = alt.draw(b, z[i]);
+        // }
+        else if (b > 0) {
+            out[i] = dv.draw_sum_of_gammas(b, z[i]);
+        }
+        else {
+            out[i] = 0.0;
+        }
+    }
+}
 
 void rpg_gamma(double *x, double *n, double *z, int *num, int *trunc)
 {

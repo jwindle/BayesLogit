@@ -31,6 +31,21 @@ extern void rpg_alt(double *x, double *h, double *z, int* num);
 extern void rpg_sp(double *x, double *h, double *z, int* num, int *iter);
 extern void rpg_hybrid(double *x, double *h, double *z, int* num);
 
+extern double BayesLogit_rpg_gamma(double h, double z, int trunc);
+extern void BayesLogit_rpg_gamma_fill(int num, const double *h,
+                                      const double *z, int trunc,
+                                      double *out);
+extern double BayesLogit_rpg_devroye(int h, double z);
+extern void BayesLogit_rpg_devroye_fill(int num, const int *h,
+                                        const double *z, double *out);
+extern double BayesLogit_rpg_sp(double h, double z, int *iter);
+extern void BayesLogit_rpg_sp_fill(int num, const double *h,
+                                   const double *z, double *out,
+                                   int *iter);
+extern double BayesLogit_rpg_hybrid(double h, double z);
+extern void BayesLogit_rpg_hybrid_fill(int num, const double *h,
+                                       const double *z, double *out);
+
 #ifdef __cplusplus
 }
 #endif

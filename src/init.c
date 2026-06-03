@@ -32,6 +32,19 @@ extern void rpg_gamma(void *, void *, void *, void *, void *);
 extern void rpg_hybrid(void *, void *, void *, void *);
 extern void rpg_sp(void *, void *, void *, void *, void*);
 
+extern double BayesLogit_rpg_gamma(double, double, int);
+extern void BayesLogit_rpg_gamma_fill(int, const double *, const double *,
+                                      int, double *);
+extern double BayesLogit_rpg_devroye(int, double);
+extern void BayesLogit_rpg_devroye_fill(int, const int *, const double *,
+                                        double *);
+extern double BayesLogit_rpg_sp(double, double, int *);
+extern void BayesLogit_rpg_sp_fill(int, const double *, const double *,
+                                   double *, int *);
+extern double BayesLogit_rpg_hybrid(double, double);
+extern void BayesLogit_rpg_hybrid_fill(int, const double *, const double *,
+                                       double *);
+
 /* table of C calls */
 
 /* NB. The Makevars of 0.6 release exclude AR1.o and DynExpFamMH.o
@@ -54,4 +67,21 @@ void R_init_BayesLogit(DllInfo *dll)
 {
     R_registerRoutines(dll, cMethods, NULL, NULL, NULL);
     R_useDynamicSymbols(dll, FALSE);
+
+    R_RegisterCCallable("BayesLogit", "rpg_gamma",
+                        (DL_FUNC) &BayesLogit_rpg_gamma);
+    R_RegisterCCallable("BayesLogit", "rpg_gamma_fill",
+                        (DL_FUNC) &BayesLogit_rpg_gamma_fill);
+    R_RegisterCCallable("BayesLogit", "rpg_devroye",
+                        (DL_FUNC) &BayesLogit_rpg_devroye);
+    R_RegisterCCallable("BayesLogit", "rpg_devroye_fill",
+                        (DL_FUNC) &BayesLogit_rpg_devroye_fill);
+    R_RegisterCCallable("BayesLogit", "rpg_sp",
+                        (DL_FUNC) &BayesLogit_rpg_sp);
+    R_RegisterCCallable("BayesLogit", "rpg_sp_fill",
+                        (DL_FUNC) &BayesLogit_rpg_sp_fill);
+    R_RegisterCCallable("BayesLogit", "rpg_hybrid",
+                        (DL_FUNC) &BayesLogit_rpg_hybrid);
+    R_RegisterCCallable("BayesLogit", "rpg_hybrid_fill",
+                        (DL_FUNC) &BayesLogit_rpg_hybrid_fill);
 }
