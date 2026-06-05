@@ -1,0 +1,13 @@
+Package: BayesLogitCallableTest
+Version: 0.1.0
+Title: Tests for BayesLogit C-Callable API
+Description: Minimal package that exercises BayesLogit's R_GetCCallable API,
+    verifying that function pointers are correctly registered and produce
+    statistically correct Polya-Gamma samples.
+Authors@R: person("Jesse", "Windle", email = "jesse.windle@gmail.com",
+                  role = c("aut", "cre"))
+License: GPL (>= 3)
+Depends: R (>= 3.6.0)
+Imports: BayesLogit
+LinkingTo: BayesLogit
+Suggests: testthat (>= 3.0.0)

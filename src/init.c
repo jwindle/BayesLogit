@@ -26,7 +26,6 @@
 /* Skeletons of declarations of public C functions */
 
 // extern void EM(void *, void *, void *, void *, void *, void *, void *, void *);
-extern void rpg_alt(void *, void *, void *, void *);
 extern void rpg_devroye(void *, void *, void *, void *);
 extern void rpg_gamma(void *, void *, void *, void *, void *);
 extern void rpg_hybrid(void *, void *, void *, void *);
@@ -53,7 +52,6 @@ extern void BayesLogit_rpg_hybrid_fill(int, const double *, const double *,
 
 static const R_CMethodDef cMethods[] = {
   //    {"EM",                       (DL_FUNC) &EM,                       8},
-    {"rpg_alt",                  (DL_FUNC) &rpg_alt,                  4},
     {"rpg_devroye",              (DL_FUNC) &rpg_devroye,              4},
     {"rpg_gamma",                (DL_FUNC) &rpg_gamma,                5},
     {"rpg_hybrid",               (DL_FUNC) &rpg_hybrid,               4},

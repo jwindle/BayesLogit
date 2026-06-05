@@ -4,10 +4,11 @@ useDynLib("BayesLogit", .registration = TRUE)
 # Define which functions people can see.
 # export(logit.R, logit.EM.R, rpg.gamma, rpg.devroye, rpg.alt, rpg.sp, rpg)
 export(rpg.gamma, rpg.devroye, rpg.sp, rpg,
-       rpg.gamma.R, rpg.devroye.R)
+       rpg.gamma.R, rpg.devroye.R, rpg.sp.R,
+       pg.m1, pg.m2, pg.var)
 
 # Useful for testing.
 # logit.R, logit.EM.R, mlogit.R, rpg.gamma.R, rpg.devroye.R
 
-importFrom("stats", "pgamma", "pnorm", "rexp", "rgamma", "rnorm",
-             "runif", "sd")
+importFrom("stats", "pgamma", "pnorm", "qgamma", "rexp", "rgamma", "rnorm",
+             "runif", "sd", "uniroot")

@@ -2,9 +2,8 @@
 \name{rpg}
 
 \alias{rpg}
-\alias{rpg.devroye}
 \alias{rpg.gamma}
-%\alias{rpg.alt}
+\alias{rpg.devroye}
 \alias{rpg.sp}
 \alias{rpg.gamma.R}
 \alias{rpg.devroye.R}
@@ -51,6 +50,8 @@ rpg.sp(num=1, h=1, z=0.0)
 rpg.gamma.R(num=1, h=1, z=0.0, trunc=200)
 
 rpg.devroye.R(num=1, h=1, z=0.0)
+
+rpg.sp.R(num=1, h=1, z=0.0)
 
 }
 

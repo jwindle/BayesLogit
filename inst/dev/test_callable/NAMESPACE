@@ -1,0 +1,4 @@
+useDynLib("BayesLogitCallableTest", .registration = TRUE)
+importFrom("BayesLogit", pg.m1, pg.var)
+export(callable_rpg_hybrid, callable_rpg_hybrid_fill,
+       callable_rpg_gamma, callable_rpg_devroye, callable_rpg_sp)
