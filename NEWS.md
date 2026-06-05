@@ -1,3 +1,9 @@
+
+# BayesLogit 2.4 (2026-06-05)
+
+- Added a C-callable Polya-Gamma RNG API (thank you Andrew Finley)
+- Added unit tests and cleaned up a bunch of stuff
+
 # BayesLogit 2.3 (2026-03-19)
 
 - Updated CITATION to use `bibentry()` replacing deprecated `citEntry()` and `personList()`.
