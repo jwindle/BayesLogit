@@ -110,6 +110,7 @@ for (ms in moment_samplers) {
 
 sp_large_h_cases <- list(
   list(b = 20, z = 0),
+  list(b = 50, z = 1.106469275917348), # Taylor branch at the proposal midpoint
   list(b = 50, z = 2),
   list(b = 100, z = 4)
 )
