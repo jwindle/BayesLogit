@@ -1,3 +1,8 @@
+# BayesLogit (development version)
+
+- Fixed integer division in the saddlepoint sampler's Taylor expansions and
+  curvature calculations near zero. This resolves an `InvertY.cpp, v_eval:
+  reached max_iter` case when the inverse is close to zero (issue #9).
 
 # BayesLogit 2.4 (2026-06-05)
 

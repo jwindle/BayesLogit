@@ -35,7 +35,7 @@ double y_eval(double v)
   else if (v < -1*tol)
     y = tanh(r) / r;
   else
-    y = 1 + (1/3) * v + (2/15) * v * v + (17/315) * v * v * v;
+    y = 1 + (1.0/3) * v + (2.0/15) * v * v + (17.0/315) * v * v * v;
   return y;
 }
 
@@ -49,7 +49,7 @@ void ydy_eval(double v, double* yp, double* dyp)
   if (fabs(v) >= tol) 
     *dyp = 0.5 * (y*y + (1-y) / v);
   else
-    *dyp = 0.5 * (y*y - 1/3 - (2/15) * v);
+    *dyp = 0.5 * (y*y - 1.0/3 - (2.0/15) * v);
 
 }
 

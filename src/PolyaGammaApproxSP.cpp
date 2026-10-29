@@ -103,7 +103,7 @@ double PolyaGammaApproxSP::y_func(double v)
   else if (v < -1*tol)
     y = tanh(r) / r;
   else
-    y = 1 + (1/3) * v + (2/15) * v * v + (17/315) * v * v * v;
+    y = 1 + (1.0/3) * v + (2.0/15) * v * v + (17.0/315) * v * v * v;
   return y;
 }
 
@@ -178,7 +178,7 @@ double PolyaGammaApproxSP::sp_approx(double x, double n, double z)
   if (fabs(v) >= 1e-6) 
     K2 = x*x + (1-x) / v;
   else
-    K2 = x*x - 1/3 - (2/15) * v;
+    K2 = x*x - 1.0/3 - (2.0/15) * v;
 
   double log_spa = 0.5 * log(0.5 * n / __PI) - 0.5 * log(K2) + n * phi;
   return exp(log_spa);
@@ -211,7 +211,7 @@ int PolyaGammaApproxSP::draw(double& d, double n, double z, int maxiter)
   if (fabs(vmd) >= 1e-6) 
     K2md = md*md + (1-md) / vmd;
   else
-    K2md = md*md - 1/3 - (2/15) * vmd;
+    K2md = md*md - 1.0/3 - (2.0/15) * vmd;
   
   double m2 = md * md;
   double al = m2*md / K2md;
